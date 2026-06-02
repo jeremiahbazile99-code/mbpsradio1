@@ -1,0 +1,124 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sky: var(--sky);
+  --color-sunny: var(--sunny);
+  --color-flame: var(--flame);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Radio Mbps Digital — logo-inspired: sky blue + sunny yellow + crimson */
+  --background: oklch(0.17 0.04 240);
+  --foreground: oklch(0.98 0.01 230);
+  --card: oklch(0.22 0.05 240);
+  --card-foreground: oklch(0.98 0.01 230);
+  --popover: oklch(0.22 0.05 240);
+  --popover-foreground: oklch(0.98 0.01 230);
+
+  --primary: oklch(0.78 0.15 235);            /* sky blue (logo bg) */
+  --primary-foreground: oklch(0.15 0.03 240);
+  --secondary: oklch(0.28 0.05 240);
+  --secondary-foreground: oklch(0.98 0.01 230);
+  --muted: oklch(0.25 0.04 240);
+  --muted-foreground: oklch(0.75 0.03 235);
+  --accent: oklch(0.85 0.17 90);               /* sunny yellow (gloves) */
+  --accent-foreground: oklch(0.15 0.03 240);
+  --destructive: oklch(0.62 0.24 25);          /* crimson red (shoes) */
+  --destructive-foreground: oklch(0.98 0.01 230);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.78 0.15 235);
+
+  --sky: oklch(0.78 0.15 235);
+  --sunny: oklch(0.85 0.17 90);
+  --flame: oklch(0.62 0.24 25);
+
+  --gradient-brand: linear-gradient(135deg, var(--sky) 0%, var(--sunny) 55%, var(--flame) 100%);
+  --gradient-hero: radial-gradient(ellipse at 25% 20%, oklch(0.78 0.15 235 / 0.45), transparent 60%),
+                   radial-gradient(ellipse at 75% 30%, oklch(0.85 0.17 90 / 0.30), transparent 60%),
+                   radial-gradient(ellipse at 60% 90%, oklch(0.62 0.24 25 / 0.35), transparent 60%);
+  --shadow-glow-blue: 0 0 40px oklch(0.78 0.15 235 / 0.55), 0 0 80px oklch(0.78 0.15 235 / 0.25);
+  --shadow-glow-red: 0 0 40px oklch(0.62 0.24 25 / 0.55), 0 0 80px oklch(0.62 0.24 25 / 0.25);
+  --shadow-glow-yellow: 0 0 40px oklch(0.85 0.17 90 / 0.55), 0 0 80px oklch(0.85 0.17 90 / 0.25);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-brand { background: var(--gradient-brand); }
+  .bg-gradient-hero { background: var(--gradient-hero); }
+  .shadow-glow-blue { box-shadow: var(--shadow-glow-blue); }
+  .shadow-glow-red { box-shadow: var(--shadow-glow-red); }
+
+  .equalizer-bar {
+    animation: eq-bounce 1.2s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  .animate-pulse-glow { animation: pulse-glow 2.4s ease-in-out infinite; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+}
+
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.62 0.24 25 / 0.7); }
+  50% { box-shadow: 0 0 0 16px oklch(0.62 0.24 25 / 0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
